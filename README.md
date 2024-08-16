@@ -3,9 +3,10 @@
 - Email: max.monla09@gmail.com
 
 ## Activdad 1
--Programa 1
--Programa 2
--Programa 3
+-p01_HolaMundo.java
+-p02_AreaCirculo.java
+-p03_AreaTriangulo.java
+-p04_PagaTrabajador.java
 
 ## Actividad 2
 -Programa 4
