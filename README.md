@@ -1,7 +1,3 @@
-# Programacion orientada a objetos I y laboratorio
-- Nombre: maxsteel05
-- Email: max.monla09@gmail.com
-
 ## Activdad 1
 -p01_HolaMundo.java
 -p02_AreaCirculo.java
@@ -9,9 +5,18 @@
 -p04_PagaTrabajador.java
 
 ## Actividad 2
--p05_.java
--p06_.java
--p07_.java
--p08_.java
--p09_.java
+-p05_OperacionesMatematicas.java
+-p06_PromedioCalificaciones.java
+-p07_OperadoresAsignacion.java
+-p08_FuncionesTrigonometricas.java
+-p09_DividirEnCifras.java
 
+## Actividad 3
+-p10_HipotenusaTriangulo.java
+-p11_CalcularAngulo.java
+-p12_ConvertirTemperatura.java
+-p13_VolumenCilindro.java
+-p14_CalculoTiempo.java
+-p15_ConvertirADolares.java
+
+## Actividad 4
