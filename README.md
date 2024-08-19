@@ -9,5 +9,9 @@
 -p04_PagaTrabajador.java
 
 ## Actividad 2
--Programa 4
--Programa 5
+-p05_.java
+-p06_.java
+-p07_.java
+-p08_.java
+-p09_.java
+
