@@ -44,6 +44,13 @@
 - p31_NumerosRomanos
 - p32_PagoEstacionamiento
 
+ ## Actividad 7
+- p39_Numeros1a100
+- p40_Numeros100a1
+- p41_ProcesaCalificaciones
+- p42_TablaMultiplicar
+- p43_ConteoNumeros
+
 ## Practica 2
 - p33_NumerosConsecutivos
 - p34_NumeroMayor
@@ -51,4 +58,16 @@
 - p36_CompraPizza
 - p37_CalculoNotas
 - p38_AceptarEstudianteV2
+
+ ## Actividad 8
+- p44_ParesAscendente
+- p45_ImparesDescendente
+- p46_TablaConversion
+- p47_ConjeturaCollatz
+
+## Practica 3
+- p48_ImparesAscendente  
+- p49_ParesDescendente  
+- p50_ConversionTemperaturas
+- p51_SerieFibonaci
   
