@@ -6,17 +6,17 @@ public class p84_LeerArregloCalificaciones {
     public static void main(String[] args) {
         int n=0;
         float suma = 0, promedio=0;
-        Scanner Sebas = new Scanner(System.in);
+        Scanner Max = new Scanner(System.in);
 
         System.out.print("\033[H\033[2J");
-        System.out.println("Cuantas calificaciones? "); n = Sebas.nextInt();
+        System.out.println("Cuantas calificaciones? "); n = Max.nextInt();
 
         float[] califs = new float[n];
 
         System.out.print("Introduce las "+ n +" calificaciones");
         for(int i=0; i<califs.length; i++){
             System.out.println("Calificacion["+(i+1)+"] = ");
-            califs[i] = Sebas.nextFloat();
+            califs[i] = Max.nextFloat();
         }
         System.out.println("Las calificaciones capturadas son: ");
         for(float cal : califs){
@@ -26,6 +26,6 @@ public class p84_LeerArregloCalificaciones {
         promedio = suma/califs.length;
         System.out.println("\nLa suma es "+ suma);
         System.out.println("\nEl promedio es "+ promedio);
-        Sebas.close();
+        Max.close();
     }
 }
