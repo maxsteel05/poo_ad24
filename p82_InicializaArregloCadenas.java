@@ -1,4 +1,4 @@
-/ p82_InicializaArregloCadenas
+// p82_InicializaArregloCadenas
 
 public class p82_InicializaArregloCadenas {
     public static void main(String[] args) {
