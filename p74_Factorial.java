@@ -1,6 +1,5 @@
-/**
- * p74_Factorial - Calcula el factorial de un numeroo entero.
- */
+// p74_Factorial - Calcula el factorial de un numeroo entero.
+
 
 import java.util.Scanner;
 
