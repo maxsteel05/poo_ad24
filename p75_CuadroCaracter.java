@@ -1,6 +1,6 @@
-/**
- * p75_CuadroCaracter - Dibuja un cuadro r x c del caracter deseado.
- */
+
+ // p75_CuadroCaracter - Dibuja un cuadro r x c del caracter deseado.
+ 
 
 import java.util.Scanner;
 
