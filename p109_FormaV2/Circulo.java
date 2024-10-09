@@ -7,7 +7,7 @@ public class Circulo extends Forma {
     }
 
     public Circulo(String color, boolean relleno, double radio) {
-        super(color, relleno);  // Llama al constructor de la clase base
+        super(color, relleno);  
         this.radio = radio;
     }
 
