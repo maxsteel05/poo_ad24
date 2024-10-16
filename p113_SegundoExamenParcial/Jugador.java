@@ -1,22 +1,33 @@
-public abstract class Jugador {
-    private String nombre;
-    private char sexo;
-    private String descripcion;
-    private double salario;
-    protected double total;
+package p113_SegundoExamenParcial;
 
-    public Jugador(String nombre, char sexo, String descripcion, double salario) {
-        this.nombre = nombre;
-        this.sexo = sexo;
-        this.descripcion = descripcion;
-        this.salario = salario;
+public abstract class Deportista {
+    private String nombreJugador;
+    private char genero;
+    private String detalles;
+    private double sueldo;
+    protected double ingresosTotales;
+
+    public Deportista(String nombreJugador, char genero, String detalles, double sueldo) {
+        this.nombreJugador = nombreJugador;
+        this.genero = genero;
+        this.detalles = detalles;
+        this.sueldo = sueldo;
     }
 
-    public abstract double getBono();
+    public abstract double calcularBono();
 
     @Override
     public String toString() {
-        return "Jugador [Nombre=" + nombre + ", Sexo=" + sexo + 
-               ", Descripcion=" + descripcion + ", Salario=" + salario + "]";
+        return "Deportista [Nombre: " + nombreJugador + ", Género: " + genero + 
+               ", Descripción: " + detalles + ", Sueldo Base: " + sueldo + "]";
+    }
+
+    public double obtenerSueldo() {
+        return sueldo;
+    }
+
+    public double obtenerIngresosTotales() {
+        return ingresosTotales;
     }
 }
+
