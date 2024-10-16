@@ -8,38 +8,38 @@ public class Equipo {
     private ArrayList<Jugador> listaJugadores;
 
     public Equipo() {
-        listaJugadores = new ArrayList<>();
+        this.listaJugadores = new ArrayList<>();
     }
 
     public Equipo(String nombreEquipo, String nombreLiga) {
         this.nombreEquipo = nombreEquipo;
         this.nombreLiga = nombreLiga;
-        listaJugadores = new ArrayList<>();
+        this.listaJugadores = new ArrayList<>();
     }
 
-    public void agregarJugador(Jugador nuevoJugador) {
-        listaJugadores.add(nuevoJugador);
+    public void añadirJugador(Jugador nuevoJugador) {
+        this.listaJugadores.add(nuevoJugador);
     }
 
-    public double calcularTotalBono() {
-        double sumaBono = 0;
-        for (Jugador jugador : listaJugadores) {
-            sumaBono += jugador.getBono();
+    public double calcularBonoTotal() {
+        double bonoTotal = 0.0;
+        for (Jugador jugador : this.listaJugadores) {
+            bonoTotal += jugador.getBono();
         }
-        return sumaBono;
+        return bonoTotal;
     }
 
-    public double calcularTotalEquipo() {
-        double sumaTotal = 0;
-        for (Jugador jugador : listaJugadores) {
-            sumaTotal += jugador.getTotal();
+    public double calcularSueldoTotal() {
+        double sueldoTotal = 0.0;
+        for (Jugador jugador : this.listaJugadores) {
+            sueldoTotal += jugador.getTotal();
         }
-        return sumaTotal;
+        return sueldoTotal;
     }
 
-    public int contarHombres() {
+    public int contarJugadoresHombres() {
         int cantidadHombres = 0;
-        for (Jugador jugador : listaJugadores) {
+        for (Jugador jugador : this.listaJugadores) {
             if (jugador.toString().contains("Sexo=H")) {
                 cantidadHombres++;
             }
@@ -47,9 +47,9 @@ public class Equipo {
         return cantidadHombres;
     }
 
-    public int contarMujeres() {
+    public int contarJugadorasMujeres() {
         int cantidadMujeres = 0;
-        for (Jugador jugador : listaJugadores) {
+        for (Jugador jugador : this.listaJugadores) {
             if (jugador.toString().contains("Sexo=M")) {
                 cantidadMujeres++;
             }
@@ -57,20 +57,24 @@ public class Equipo {
         return cantidadMujeres;
     }
 
-    public void generarReporte() {
-        System.out.println(">> Equipo [Nombre=" + nombreEquipo + ", Liga=" + nombreLiga + 
-                           ", Total de Jugadores=" + listaJugadores.size() + 
-                           ", Bono Total=" + calcularTotalBono() + 
-                           ", Total General=" + calcularTotalEquipo() + 
-                           ", Hombres=" + contarHombres() + 
-                           ", Mujeres=" + contarMujeres() + "]");
-        for (Jugador jugador : listaJugadores) {
-            System.out.println("- " + jugador);
+    public void generarInforme() {
+        System.out.println("== Equipo: " + this.nombreEquipo + " | Liga: " + this.nombreLiga + " ==");
+        System.out.println("Total Jugadores: " + this.listaJugadores.size());
+        System.out.println("Total Bono: " + calcularBonoTotal());
+        System.out.println("Total Sueldo (Bono + Salario): " + calcularSueldoTotal());
+        System.out.println("Hombres: " + contarJugadoresHombres() + " | Mujeres: " + contarJugadorasMujeres());
+        System.out.println("-----------------------------------");
+        for (Jugador jugador : this.listaJugadores) {
+            System.out.println(jugador);
         }
     }
 
     @Override
     public String toString() {
-        return "Equipo [Nombre=" + nombreEquipo + ", Liga=" + nombreLiga + "]";
+        return "Equipo: " + this.nombreEquipo + " | Liga: " + this.nombreLiga;
     }
 }
+
+
+
+
