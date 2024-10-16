@@ -1,26 +1,23 @@
-public class JugadorActivo extends Jugador {
-    private int partidos;
-    private int goles;
+package p113_SegundoExamenParcial;
+public class FutbolistaEnJuego extends Deportista {
+    private int juegosDisputados;
+    private int golesMarcados;
 
-    public JugadorActivo(String nombre, char sexo, String descripcion, double salario, int partidos, int goles) {
-        super(nombre, sexo, descripcion, salario);
-        this.partidos = partidos;
-        this.goles = goles;
-        this.total = salario + getBono();
+    public FutbolistaEnJuego(String nombreJugador, char genero, String detalles, double sueldo, int juegosDisputados, int golesMarcados) {
+        super(nombreJugador, genero, detalles, sueldo);
+        this.juegosDisputados = juegosDisputados;
+        this.golesMarcados = golesMarcados;
+        this.ingresosTotales = sueldo + calcularBono();
     }
 
     @Override
-    public double getBono() {
-        return (getSalario() * 0.10) + (partidos * 50) + (goles * 5);
+    public double calcularBono() {
+        return (obtenerSueldo() * 0.10) + (juegosDisputados * 50) + (golesMarcados * 5);
     }
-
     @Override
     public String toString() {
-        return super.toString() + ", Partidos=" + partidos + 
-               ", Goles=" + goles + ", Bono=" + getBono() + ", Total=" + total;
-    }
-
-    public double getSalario() {
-        return super.salario;
+        return "FutbolistaEnJuego [" + super.toString() + ", Juegos Disputados=" + juegosDisputados + 
+               ", Goles Marcados=" + golesMarcados + ", Bono Calculado=" + calcularBono() + 
+               ", Ingresos Totales=" + ingresosTotales + "]";
     }
 }
