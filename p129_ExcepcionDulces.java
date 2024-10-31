@@ -6,11 +6,11 @@ public class p129_ExcepcionDulces {
     public static void main(String[] args) {
         System.out.print("\033[H\033[2J");
 
-        Scanner Sebas = new Scanner(System.in);
+        Scanner Max = new Scanner(System.in);
         
         try {
-            System.out.print("Cuántos dulces hay en existencia ? "); int Dulces = Sebas.nextInt();
-            System.out.print("Cuántos niños hay en el barrio   ? "); int Chamacos = Sebas.nextInt();
+            System.out.print("Cuántos dulces hay en existencia ? "); int Dulces = Max.nextInt();
+            System.out.print("Cuántos niños hay en el barrio   ? "); int Chamacos = Max.nextInt();
             int DulcePorChamaco = Dulces / Chamacos;
             System.out.println("A cada niño le toca " + DulcePorChamaco + " dulces ");
         } catch (InputMismatchException e) {
@@ -19,7 +19,7 @@ public class p129_ExcepcionDulces {
             System.out.println("Sin niños no puedo repartir dulces ... ");
         } finally {
             System.out.println(" ");
-            Sebas.close();
+            Max.close();
         }
     }
 }
