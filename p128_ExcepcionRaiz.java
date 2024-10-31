@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class p128_ExcepcionRaiz {
     public static void main(String[] args) {
-        Scanner Sebas = new Scanner(System.in);
+        Scanner Max = new Scanner(System.in);
         System.out.print("\033[H\033[2J");
         
         try {
             System.out.print("Por favor, introduce un número: ");
-            float Numero = Sebas.nextFloat();
+            float Numero = Max.nextFloat();
     
             
             if (Numero < 0 ) {
@@ -19,7 +19,7 @@ public class p128_ExcepcionRaiz {
         } catch (Exception e) {
             System.out.println("Por favor, ingresa un valor numérico ... ");
         } finally {
-            Sebas.close();
+            Max.close();
         }
     }
 } 
