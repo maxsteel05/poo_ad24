@@ -6,7 +6,7 @@ public class p130_ExcepcionEdades {
     public static void main(String[] args) {
         int[] EdadesUsuarios = new int[5];
 
-        Scanner Sebas = new Scanner(System.in);
+        Scanner Max = new Scanner(System.in);
         System.out.print("\033[H\033[2J");
 
         System.out.println("--- Se captura la edad de 5 personas --- ");
