@@ -1,251 +1,243 @@
-
-    package p147_TercerExamenParcial;
+package p147_TercerExamenParcial;
 
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.awt.*;
 
 public class App extends JFrame implements ActionListener {
-    ArrayList <Jugador> datos;
-    JMenuBar menuBar;
-    JMenu mnuArchivo, mnuAyuda;
-    JMenuItem smnAbrir, smnGuardar, smnSalir, smnAcercade;
-    JDialog jdlAcercade;
-    JLabel lblDatos;
-    JTable table;
-    JScrollPane spane;
-    DefaultTableModel modelo;
-    JPanel pnlTabla, pnlDatos, pnlBotones;
-    JLabel lblNombre, lblEdad, lblSexo, lblEstado_Civil, lblDescripcion, lblSalario;
-    JTextField txtNombre, txtEdad, txtSexo, txtEstado_Civil, txtDescripcion, txtSalario;
-    JButton btnAgregar, btnGrabar;
-    JFileChooser fchArchivo;
-    
+    private ArrayList<Jugador> datos;
+    private JMenuBar menuBar;
+    private JMenu mnuArchivo, mnuAyuda;
+    private JMenuItem smnAbrir, smnGuardar, smnSalir, smnAcercade;
+    private JDialog jdlAcercade;
+    private JLabel lblDatos;
+    private JTable table;
+    private JScrollPane spane;
+    private DefaultTableModel modelo;
+    private JPanel pnlTabla, pnlDatos, pnlBotones;
+    private JLabel lblNombre, lblEdad, lblSexo, lblEstadoCivil, lblDescripcion, lblSalario;
+    private JTextField txtNombre, txtEdad, txtSexo, txtEstadoCivil, txtDescripcion, txtSalario;
+    private JButton btnAgregar, btnGrabar;
+    private JFileChooser fchArchivo;
+
     public App() {
         super("Procesa datos de Jugadores");
+        inicializarMenu();
+        inicializarAcercaDe();
+        inicializarComponentes();
+        datos = new ArrayList<>();
+    }
+
+    private void inicializarMenu() {
         menuBar = new JMenuBar();
         setJMenuBar(menuBar);
+
         mnuArchivo = new JMenu("Archivo");
         menuBar.add(mnuArchivo);
+
         mnuAyuda = new JMenu("Ayuda");
         menuBar.add(mnuAyuda);
-        smnAbrir = new JMenuItem("Abrir");
-        mnuArchivo.add(smnAbrir);
-        smnAbrir.addActionListener(this);
-        smnGuardar = new JMenuItem("Guardar");
-        mnuArchivo.add(smnGuardar);
-        smnGuardar.addActionListener(this);
+
+        smnAbrir = crearMenuItem("Abrir", mnuArchivo);
+        smnGuardar = crearMenuItem("Guardar", mnuArchivo);
         mnuArchivo.add(new JSeparator());
-        smnSalir = new JMenuItem("Salir");
-        mnuArchivo.add(smnSalir);
-        smnSalir.addActionListener(this);
-        smnAcercade = new JMenuItem("Acerca de ...");
-        mnuAyuda.add(smnAcercade);
-        smnAcercade.addActionListener(this);
+        smnSalir = crearMenuItem("Salir", mnuArchivo);
+        smnAcercade = crearMenuItem("Acerca de ...", mnuAyuda);
+    }
 
-        jdlAcercade = new JDialog(this, "Acerca de ...");
+    private JMenuItem crearMenuItem(String texto, JMenu menu) {
+        JMenuItem item = new JMenuItem(texto);
+        menu.add(item);
+        item.addActionListener(this);
+        return item;
+    }
+
+    private void inicializarAcercaDe() {
+        jdlAcercade = new JDialog(this, "Acerca de ...", true);
         jdlAcercade.setSize(400, 250);
-        jdlAcercade.setModal(true);
-        jdlAcercade.setLocationRelativeTo(null);
-        lblDatos = new JLabel("<html>Programación Orientada a Objetos I<br>Sebastian Guerra Hernandez<br>sebas@uaz.edu.mx<br>Tercer Examen Parcial</html>",JLabel.CENTER);
-        lblDatos.setFont(new Font("Arial",Font.BOLD, 18));
+        jdlAcercade.setLocationRelativeTo(this);
+        lblDatos = new JLabel("<html>Programación Orientada a Objetos I<br>Sebastian Guerra Hernandez<br>sebas@uaz.edu.mx<br>Tercer Examen Parcial</html>", JLabel.CENTER);
+        lblDatos.setFont(new Font("Arial", Font.BOLD, 18));
         jdlAcercade.add(lblDatos);
+    }
 
+    private void inicializarComponentes() {
+        setLayout(new GridLayout(3, 1));
 
+        inicializarTabla();
+        inicializarPanelDatos();
+        inicializarPanelBotones();
+    }
 
-        setLayout(new GridLayout(3, 1)); 
-        pnlTabla = new JPanel();
-        pnlTabla.setLayout(new BoxLayout(pnlTabla, BoxLayout.X_AXIS));
+    private void inicializarTabla() {
+        pnlTabla = new JPanel(new BorderLayout());
         getContentPane().add(pnlTabla);
 
-        spane = new JScrollPane();
-        spane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        modelo = new DefaultTableModel(new String[]{"Nombre", "Edad", "Sexo", "Estado Civil", "Descripcion", "Salario"}, 0);
+        table = new JTable(modelo);
+        table.getTableHeader().setBackground(Color.CYAN);
+
+        spane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         pnlTabla.add(spane);
 
-        table = new JTable();
-        table.getTableHeader().setBackground(Color.CYAN);
-        table.getTableHeader().setForeground(Color.black);
-
-        spane.setViewportView(table);
-
-        modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new String[]{"Nombre","Edad","Sexo","Estado Civil", "Descripcion", "Salario"});
-
-        table.setModel(modelo);
-
-        pnlDatos = new JPanel();
-
-        getContentPane().add(pnlDatos);
-
-        pnlDatos.setLayout(new GridLayout(6, 2, 0, 0));
-
-        lblNombre = new JLabel("Nombre");
-        lblNombre.setHorizontalAlignment(SwingConstants.RIGHT);
-        txtNombre = new JTextField();
-        pnlDatos.add(lblNombre);
-        pnlDatos.add(txtNombre);
-
-        lblEdad = new JLabel("Edad");
-        lblEdad.setHorizontalAlignment(SwingConstants.RIGHT);
-        txtEdad = new JTextField();
-        pnlDatos.add(lblEdad);
-        pnlDatos.add(txtEdad);
-
-        lblSexo = new JLabel("Sexo");
-        lblSexo.setHorizontalAlignment(SwingConstants.RIGHT);
-        txtSexo = new JTextField();
-        pnlDatos.add(lblSexo);
-        pnlDatos.add(txtSexo);
-
-        lblEstado_Civil = new JLabel("Estado Civil");
-        lblEstado_Civil.setHorizontalAlignment(SwingConstants.RIGHT);
-        txtEstado_Civil = new JTextField();
-        pnlDatos.add(lblEstado_Civil);
-        pnlDatos.add(txtEstado_Civil);
-
-        lblDescripcion = new JLabel("Descripcion");
-        lblDescripcion.setHorizontalAlignment(SwingConstants.RIGHT);
-        txtDescripcion = new JTextField();
-        pnlDatos.add(lblDescripcion);
-        pnlDatos.add(txtDescripcion);
-
-        lblSalario = new JLabel("Salario");
-        lblSalario.setHorizontalAlignment(SwingConstants.RIGHT);
-        txtSalario = new JTextField();
-        pnlDatos.add(lblSalario);
-        pnlDatos.add(txtSalario);
-
-        //Toma el renglón 
         table.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                int ren = table.rowAtPoint(e.getPoint());
-                mostrarDatos(ren);
+                mostrarDatos(table.rowAtPoint(e.getPoint()));
             }
         });
+    }
 
+    private void inicializarPanelDatos() {
+        pnlDatos = new JPanel(new GridLayout(6, 2));
+        getContentPane().add(pnlDatos);
+
+        lblNombre = new JLabel("Nombre", SwingConstants.RIGHT);
+        txtNombre = new JTextField();
+        lblEdad = new JLabel("Edad", SwingConstants.RIGHT);
+        txtEdad = new JTextField();
+        lblSexo = new JLabel("Sexo", SwingConstants.RIGHT);
+        txtSexo = new JTextField();
+        lblEstadoCivil = new JLabel("Estado Civil", SwingConstants.RIGHT);
+        txtEstadoCivil = new JTextField();
+        lblDescripcion = new JLabel("Descripcion", SwingConstants.RIGHT);
+        txtDescripcion = new JTextField();
+        lblSalario = new JLabel("Salario", SwingConstants.RIGHT);
+        txtSalario = new JTextField();
+
+        agregarCampo(lblNombre, txtNombre);
+        agregarCampo(lblEdad, txtEdad);
+        agregarCampo(lblSexo, txtSexo);
+        agregarCampo(lblEstadoCivil, txtEstadoCivil);
+        agregarCampo(lblDescripcion, txtDescripcion);
+        agregarCampo(lblSalario, txtSalario);
+    }
+
+    private void agregarCampo(JLabel label, JTextField field) {
+        pnlDatos.add(label);
+        pnlDatos.add(field);
+    }
+
+    private void inicializarPanelBotones() {
         pnlBotones = new JPanel();
         btnAgregar = new JButton("Agregar");
         btnAgregar.addActionListener(this);
         pnlBotones.add(btnAgregar);
+
         btnGrabar = new JButton("Grabar");
         btnGrabar.setEnabled(false);
         btnGrabar.addActionListener(this);
         pnlBotones.add(btnGrabar);
+
         add(pnlBotones);
     }
 
-    public void mostrarDatos(int ren) {
-        Jugador jugador = datos.get(ren);
+    private void mostrarDatos(int index) {
+        Jugador jugador = datos.get(index);
         txtNombre.setText(jugador.getNombre());
-        txtEdad.setText(Integer.toString(jugador.getEdad()));
-        txtSexo.setText(Character.toString(jugador.getSexo()));
-        txtEstado_Civil.setText(jugador.getEstadocivil());
+        txtEdad.setText(String.valueOf(jugador.getEdad()));
+        txtSexo.setText(String.valueOf(jugador.getSexo()));
+        txtEstadoCivil.setText(jugador.getEstadocivil());
         txtDescripcion.setText(jugador.getDescripcion());
-        txtSalario.setText(Double.toString(jugador.getSalario()));
+        txtSalario.setText(String.valueOf(jugador.getSalario()));
     }
 
-
-    public void cargarDatos() {
-        DefaultTableModel dm = (DefaultTableModel)table.getModel();
-        while(dm.getRowCount() > 0) dm.removeRow(0);
-        Object[] obj = new Object[6]; 
-        for(int i = 0; i < datos.size(); i++) {
-            obj[0] = datos.get(i).getNombre();
-            obj[1] = datos.get(i).getEdad();
-            obj[2] = datos.get(i).getSexo();
-            obj[3] = datos.get(i).getEstadocivil();
-            obj[4] = datos.get(i).getDescripcion();
-            obj[5] = datos.get(i).getSalario();
-            modelo.addRow(obj);
+    private void cargarDatos() {
+        modelo.setRowCount(0);
+        for (Jugador jugador : datos) {
+            modelo.addRow(new Object[]{jugador.getNombre(), jugador.getEdad(), jugador.getSexo(), jugador.getEstadocivil(), jugador.getDescripcion(), jugador.getSalario()});
         }
     }
 
-    public void activarCampos(boolean actdes) {
-        for (Component cp : pnlDatos.getComponents())
-        if (cp instanceof JTextField)
-            cp.setEnabled(actdes);
+    private void activarCampos(boolean activar) {
+        for (Component componente : pnlDatos.getComponents()) {
+            if (componente instanceof JTextField) {
+                componente.setEnabled(activar);
+            }
+        }
     }
 
-    public void limpiarCampos() {
-        for (Component cp : pnlDatos.getComponents())
-            if (cp instanceof JTextField)
-                ((JTextField)cp).setText("");
+    private void limpiarCampos() {
+        for (Component componente : pnlDatos.getComponents()) {
+            if (componente instanceof JTextField) {
+                ((JTextField) componente).setText("");
+            }
+        }
     }
 
-    public void guardarCampos() {
-        Jugador jugador = new Jugador();
-        jugador.setNombre(txtNombre.getText());
-        jugador.setEdad(Integer.parseInt(txtEdad.getText()));
-        jugador.setSexo(txtSexo.getText().charAt(0));
-        jugador.setEstadocivil(txtEstado_Civil.getText());
-        jugador.setDescripcion(txtDescripcion.getText());
-        jugador.setSalario(Double.parseDouble(txtSalario.getText()));
-        datos.add(jugador); 
+    private void guardarCampos() {
+        Jugador jugador = new Jugador(
+                txtNombre.getText(),
+                Integer.parseInt(txtEdad.getText()),
+                txtSexo.getText().charAt(0),
+                txtEstadoCivil.getText(),
+                txtDescripcion.getText(),
+                Double.parseDouble(txtSalario.getText())
+        );
+        datos.add(jugador);
         cargarDatos();
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == smnSalir) dispose();
-        else if(e.getSource() == smnAcercade) jdlAcercade.setVisible(true);
-        else if(e.getSource()==btnAgregar) {
+        Object source = e.getSource();
+        if (source == smnSalir) dispose();
+        else if (source == smnAcercade) jdlAcercade.setVisible(true);
+        else if (source == btnAgregar) {
             activarCampos(true);
             limpiarCampos();
-            txtNombre.requestFocus();
             btnAgregar.setEnabled(false);
             btnGrabar.setEnabled(true);
-        } else if(e.getSource()==btnGrabar) {
+        } else if (source == btnGrabar) {
             guardarCampos();
             limpiarCampos();
             activarCampos(false);
             btnGrabar.setEnabled(false);
             btnAgregar.setEnabled(true);
-        } else if(e.getSource()== smnGuardar) {
-            fchArchivo = new JFileChooser();
-            fchArchivo.setFileFilter(new FileNameExtensionFilter("Archivos de datos (.dat)", new String[]{"dat"}));
-            fchArchivo.setCurrentDirectory(new File("."));
-            int res = fchArchivo.showSaveDialog(this);
+        } else if (source == smnGuardar) {
+            guardarArchivo();
+        } else if (source == smnAbrir) {
+            abrirArchivo();
+        }
+    }
+
+    private void guardarArchivo() {
+        fchArchivo = new JFileChooser();
+        fchArchivo.setFileFilter(new FileNameExtensionFilter("Archivos de datos (.dat)", "dat"));
+        if (fchArchivo.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             File archivo = fchArchivo.getSelectedFile();
-            if (res == JFileChooser.APPROVE_OPTION) {
-                File arch = fchArchivo.getSelectedFile();
-                try {
-                    Util.grabarDatos(arch.getName(),datos);
-                    JOptionPane.showMessageDialog(this, "Datos Grabados en : " +
-                        arch.getName(),"Correcto" ,JOptionPane.INFORMATION_MESSAGE);
-                } catch (Exception e2) {
-                    JOptionPane.showMessageDialog(this, "Error al procesar el archivo",
-                        "Error",JOptionPane.ERROR_MESSAGE);
-                }
+            try {
+                Util.grabarDatos(archivo.getName(), datos);
+                JOptionPane.showMessageDialog(this, "Datos guardados en: " + archivo.getName(), "Correcto", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al procesar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else if (e.getSource() == smnAbrir) {
-            fchArchivo = new JFileChooser();
-            fchArchivo.setCurrentDirectory(new File("."));
-            fchArchivo.setFileFilter(new FileNameExtensionFilter("Archivos de datos (.dat)", new String[]{"dat"}));
-            int res = fchArchivo.showOpenDialog(null);
+        }
+    }
+
+    private void abrirArchivo() {
+        fchArchivo = new JFileChooser();
+        fchArchivo.setFileFilter(new FileNameExtensionFilter("Archivos de datos (.dat)", "dat"));
+        if (fchArchivo.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File archivo = fchArchivo.getSelectedFile();
-            if (res == JFileChooser.APPROVE_OPTION) {
-                File arch = fchArchivo.getSelectedFile();
-                try {
-                    datos = Util.leerDatos(arch.getName());
-                    this.cargarDatos();
-                } catch (Exception e2) {
-                    JOptionPane.showMessageDialog(this, "Error al procesar el archivo",
-                        "Error",JOptionPane.ERROR_MESSAGE);
-                }
+            try {
+                datos = Util.leerDatos(archivo.getName());
+                cargarDatos();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al procesar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     public static void main(String[] args) {
         App app = new App();
-        app.setBounds(0, 0, 650, 450);
+        app.setSize(650, 450);
         app.setLocationRelativeTo(null);
-        app.setVisible(true);
         app.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        app.datos = new ArrayList<>(); 
+        app.setVisible(true);
         app.activarCampos(false);
     }
 }
